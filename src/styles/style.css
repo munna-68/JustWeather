@@ -1,1 +1,563 @@
 @import "./fonts.css";
+
+:root {
+  --bg-color: #f4f6f8;
+  --card-bg: #f3f3f3;
+  --text-main: #000000;
+  --text-muted: #9d9d9d;
+  --accent-color: #000000;
+  --progress-track-color: #dfe3e8;
+  --progress-fill-color: #5a9df2;
+  --progress-cloud-fill-color: #9aa3b2;
+  --progress-height: 10px;
+  --progress-cloud-segment-size: 30px;
+  --uv-ring-color: #f97316;
+  --uv-ring-track-color: #dfe3e8;
+  --uv-ring-progress: 62%;
+  --border-radius-lg: 24px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 8px;
+  --shadow-sm: 6px 6px 16px 0px rgba(0, 0, 0, 0.25);
+  --shadow-md: 8px 8px 16px 0px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 300;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dashboard-container {
+  width: min(100%, 1460px);
+  padding: 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container .site-logo {
+  height: 40px;
+  width: auto;
+}
+
+.unit-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 4px;
+  box-shadow: var(--shadow-md);
+  height: 64px;
+  width: 164px;
+}
+
+.unit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #ffffff;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unit-label {
+  display: flex;
+  align-items: flex-end;
+  line-height: 1;
+  font-size: 32px;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 400;
+  color: #000000;
+  pointer-events: none;
+  transform: translateX(-2px);
+}
+
+.unit-deg {
+  font-size: 0.55em;
+  line-height: 1.9;
+}
+
+.unit-btn.active {
+  background-color: var(--accent-color);
+}
+
+.unit-btn.active .unit-label {
+  color: #ffffff;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.29fr 1fr;
+  grid-template-rows: repeat(12, minmax(0, 1fr));
+  height: calc(100vh - 140px);
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.main-weather-card {
+  grid-column: 1 / 2;
+  grid-row: 1 / 13;
+  padding: 48px;
+}
+
+.humidity-card {
+  grid-column: 2 / 3;
+  grid-row: 1 / 7;
+}
+
+.cloud-cover-card {
+  grid-column: 2 / 3;
+  grid-row: 7 / 13;
+}
+
+.theme-toggle-card {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+  align-items: center;
+}
+
+.uv-index-card {
+  grid-column: 3 / 4;
+  grid-row: 3 / 8;
+}
+
+.precipitation-card {
+  grid-column: 3 / 4;
+  grid-row: 8 / 13;
+}
+
+/* Main Weather Card */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 80px;
+  width: 100%;
+}
+
+.search-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 8px 24px;
+}
+
+.icon-search {
+  width: 33px;
+  height: 33px;
+  opacity: 0.4;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 12px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  outline: none;
+  color: var(--text-main);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.location-btn {
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+  flex-shrink: 0;
+}
+
+.location-btn:hover {
+  background: #e5e7eb;
+}
+
+.icon-location-target {
+  width: 30px;
+  height: 30px;
+  opacity: 0.4;
+}
+
+.current-location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  margin-left: 6px;
+}
+
+.icon-pin {
+  width: 16px;
+  height: 26px;
+  opacity: 0.75;
+}
+
+.location-name {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--text-muted);
+}
+
+.current-temperature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.temp-value {
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 128px;
+  line-height: 0.9;
+  letter-spacing: -4px;
+}
+
+.temp-unit {
+  font-size: 48px;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 12px;
+  color: #9d9d9d;
+}
+
+.feels-like {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--text-muted);
+  margin-bottom: 64px;
+}
+
+.feels-like-value {
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--text-main);
+}
+
+.current-condition {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: auto;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.current-condition-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.icon-condition-large {
+  width: 136px;
+  height: 136px;
+}
+
+.condition-name {
+  font-size: 40px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.current-datetime {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.icon-calendar {
+  width: 22px;
+  height: 20px;
+  opacity: 0.5;
+  margin-top: 2px;
+}
+
+.datetime-info .date-text {
+  font-size: 20px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.datetime-info .time-text {
+  font-size: 20px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.card-header img {
+  width: 35px;
+  height: 35px;
+}
+
+.card-title {
+  font-size: 32px;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.metric-display {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.metric-value {
+  font-size: 96px;
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: -2px;
+}
+
+.metric-unit {
+  font-size: 48px;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 400;
+  color: #9d9d9d;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+
+.progress-bar-container {
+  height: var(--progress-height);
+  background-color: var(--progress-track-color);
+  border-radius: 999px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--progress-fill-color);
+  border-radius: 999px;
+}
+
+.progress-bar-fill.solid-fill {
+  background-color: var(--progress-fill-color);
+}
+
+.cloud-cover-card .progress-bar-container {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    to right,
+    var(--progress-track-color) 0 74%,
+    transparent 74% 100%
+  );
+  background-size: var(--progress-cloud-segment-size) 100%;
+  background-repeat: round;
+}
+
+.cloud-cover-card .progress-bar-fill,
+.progress-bar-fill.dashed-fill {
+  border-radius: 5px;
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--progress-cloud-fill-color) 0 74%,
+    transparent 74% 100%
+  );
+  background-size: var(--progress-cloud-segment-size) 100%;
+  background-repeat: round;
+}
+
+.theme-toggle-card {
+  padding: 20px;
+}
+
+.theme-toggle-card .card-header {
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.theme-switch-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.theme-btn {
+  width: 120px;
+  border: none;
+  background: #ffffff;
+  padding: 8px 0;
+  border-radius: 24px;
+  cursor: pointer;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.theme-btn.active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+.uv-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-top: 6px;
+}
+
+.uv-ring-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--uv-ring-color) 0 var(--uv-ring-progress),
+    var(--uv-ring-track-color) var(--uv-ring-progress) 100%
+  );
+}
+
+.uv-ring-container::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background-color: var(--card-bg);
+  border-radius: 50%;
+}
+
+.uv-value {
+  position: relative;
+  z-index: 1;
+  font-size: 44px;
+  line-height: 1;
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  color: #111827;
+}
+
+.uv-ring-svg {
+  display: none;
+}
+
+.uv-status {
+  font-size: 42px;
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  color: #6b7280;
+}
+
+.icon-uv {
+  opacity: 0.95;
+}
+
+.precipitation-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin-top: 8px;
+}
+
+.icon-precipitation-large {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 16px;
+}
+
+.precipitation-status {
+  font-size: 36px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 500;
+}

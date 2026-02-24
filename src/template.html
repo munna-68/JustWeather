@@ -17,30 +17,31 @@
         </div>
 
         <div class="unit-toggle-container">
-          <button class="unit-btn active" aria-label="Celsius">
-            <span class="unit-text">°C</span>
+          <button class="unit-btn celsius active" aria-label="Celsius">
+            <span class="unit-label"><span class="unit-deg">°</span>C</span>
           </button>
-          <button class="unit-btn" aria-label="Fahrenheit">
-            <span class="unit-text">°F</span>
+          <button class="unit-btn fahrenheit" aria-label="Fahrenheit">
+            <span class="unit-label"><span class="unit-deg">°</span>F</span>
           </button>
         </div>
       </header>
 
       <main class="weather-grid">
-        <!-- 1. Main Weather Card (Left Column, spans multiple rows) -->
         <article class="card main-weather-card">
-          <div class="search-container">
-            <img
-              src="./icons/search-icon.svg"
-              alt="Search"
-              class="icon-search"
-            />
-            <input
-              type="text"
-              class="search-input"
-              placeholder="Search Location"
-              aria-label="Search Location"
-            />
+          <div class="search-wrapper">
+            <div class="search-container">
+              <img
+                src="./icons/search-icon.svg"
+                alt="Search"
+                class="icon-search"
+              />
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search Location"
+                aria-label="Search Location"
+              />
+            </div>
             <button class="location-btn" aria-label="Use Current Location">
               <img
                 src="./icons/getLocation-logo.svg"
@@ -69,23 +70,24 @@
           </div>
 
           <div class="current-condition">
-            <img
-              src="./icons/precipitation-icons/clear-day.svg"
-              alt="Clear Weather"
-              class="icon-condition-large"
-            />
-            <h3 class="condition-name">Clear</h3>
-          </div>
-
-          <div class="current-datetime">
-            <img
-              src="./icons/currentLocation-logo.svg"
-              alt="Calendar"
-              class="icon-calendar"
-            />
-            <div class="datetime-info">
-              <p class="date-text">Sunday, Feb 2024</p>
-              <p class="time-text">2:30 AM</p>
+            <div class="current-condition-wrapper">
+              <img
+                src="./icons/precipitation-icons/clear-day.svg"
+                alt="Clear Weather"
+                class="icon-condition-large"
+              />
+              <h3 class="condition-name">Clear</h3>
+            </div>
+            <div class="current-datetime">
+              <img
+                src="./icons/calender.svg"
+                alt="Calendar"
+                class="icon-calendar"
+              />
+              <div class="datetime-info">
+                <p class="date-text">Sunday, Feb 2024</p>
+                <p class="time-text">2:30 AM</p>
+              </div>
             </div>
           </div>
         </article>
