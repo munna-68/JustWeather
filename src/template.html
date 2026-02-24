@@ -1,13 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>
-    Hello World!
-  </h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <div class="logo-container">
+          <img
+            src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+            alt="JustWeather Logo"
+            class="site-logo"
+          />
+        </div>
+
+        <div class="unit-toggle-container">
+          <button class="unit-btn active" aria-label="Celsius">
+            <span class="unit-text">°C</span>
+          </button>
+          <button class="unit-btn" aria-label="Fahrenheit">
+            <span class="unit-text">°F</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="weather-grid">
+        <!-- 1. Main Weather Card (Left Column, spans multiple rows) -->
+        <article class="card main-weather-card">
+          <div class="search-container">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Search"
+              class="icon-search"
+            />
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search Location"
+              aria-label="Search Location"
+            />
+            <button class="location-btn" aria-label="Use Current Location">
+              <img
+                src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                alt="Current Location"
+                class="icon-location-target"
+              />
+            </button>
+          </div>
+
+          <div class="current-location">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Location Pin"
+              class="icon-pin"
+            />
+            <h2 class="location-name">New York, USA</h2>
+          </div>
+
+          <div class="current-temperature">
+            <span class="temp-value">72</span>
+            <span class="temp-unit">°F</span>
+          </div>
+
+          <div class="feels-like">
+            <p>Feels Like <span class="feels-like-value">65°C</span></p>
+          </div>
+
+          <div class="current-condition">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Clear Weather"
+              class="icon-condition-large"
+            />
+            <h3 class="condition-name">Clear</h3>
+          </div>
+
+          <div class="current-datetime">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Calendar"
+              class="icon-calendar"
+            />
+            <div class="datetime-info">
+              <p class="date-text">Sunday, Feb 2024</p>
+              <p class="time-text">2:30 AM</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card humidity-card">
+          <header class="card-header">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Humidity"
+              class="icon-humidity"
+            />
+            <h3 class="card-title">Humidity</h3>
+          </header>
+          <div class="card-content">
+            <div class="metric-display">
+              <span class="metric-value">69</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div
+                class="progress-bar-fill solid-fill"
+                style="width: 69%"
+              ></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card theme-toggle-card">
+          <header class="card-header">
+            <h3 class="card-title">Toggle Theme</h3>
+          </header>
+          <div class="card-content">
+            <div class="theme-switch-container">
+              <button class="theme-btn dark-theme active" aria-pressed="true">
+                Dark
+              </button>
+              <button class="theme-btn light-theme" aria-pressed="false">
+                Light
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card cloud-cover-card">
+          <header class="card-header">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Cloud Cover"
+              class="icon-cloud"
+            />
+            <h3 class="card-title">Cloud Cover</h3>
+          </header>
+          <div class="card-content">
+            <div class="metric-display">
+              <span class="metric-value">22</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div
+                class="progress-bar-fill dashed-fill"
+                style="width: 22%"
+              ></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card uv-index-card">
+          <header class="card-header">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="UV Index"
+              class="icon-uv"
+            />
+            <h3 class="card-title">UV Index</h3>
+          </header>
+          <div class="card-content uv-content">
+            <div class="uv-ring-container">
+              <span class="uv-value">6</span>
+              <img
+                src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                alt="UV Ring"
+                class="uv-ring-svg"
+              />
+            </div>
+            <span class="uv-status">High</span>
+          </div>
+        </article>
+
+        <article class="card precipitation-card">
+          <header class="card-header">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Precipitation"
+              class="icon-precipitation"
+            />
+            <h3 class="card-title">Precipitation</h3>
+          </header>
+          <div class="card-content precipitation-content">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt="Clear Precipitation"
+              class="icon-precipitation-large"
+            />
+            <h4 class="precipitation-status">Clear</h4>
+          </div>
+        </article>
+      </main>
+    </div>
+  </body>
 </html>
