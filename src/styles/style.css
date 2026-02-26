@@ -447,11 +447,28 @@ body {
 
 .theme-toggle-card {
   padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .theme-toggle-card .card-header {
   justify-content: center;
+  margin-bottom: 0;
+  gap: 12px;
+}
+
+.theme-toggle-card .card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.theme-toggle-card.expanded .card-header {
   margin-bottom: 16px;
+}
+
+.theme-toggle-card.expanded .card-content {
+  max-height: 100px;
 }
 
 .theme-switch-container {
@@ -560,4 +577,267 @@ body {
   font-family: "Roboto Condensed";
   font-style: normal;
   font-weight: 500;
+}
+
+.icon-dropdown {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-card.expanded .icon-dropdown {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px 12px;
+    gap: 16px;
+  }
+
+  .logo-container .site-logo {
+    height: 32px;
+  }
+
+  .unit-toggle-container {
+    height: 48px;
+    width: 120px;
+    gap: 4px;
+    border-radius: 12px;
+    padding: 3px;
+  }
+
+  .unit-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .unit-label {
+    font-size: 24px;
+  }
+
+  .weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    height: auto;
+    gap: 16px;
+  }
+
+  .card {
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .main-weather-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding: 24px;
+    order: 1;
+  }
+
+  .theme-toggle-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding: 14px 24px;
+    align-items: stretch;
+    order: 2;
+  }
+
+  .humidity-card {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    order: 3;
+  }
+
+  .cloud-cover-card {
+    grid-column: 2 / 3;
+    grid-row: auto;
+    order: 4;
+  }
+
+  .uv-index-card {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    order: 5;
+  }
+
+  .precipitation-card {
+    grid-column: 2 / 3;
+    grid-row: auto;
+    order: 6;
+  }
+
+  .search-wrapper {
+    margin-bottom: 32px;
+    gap: 8px;
+  }
+
+  .search-container {
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  .icon-search {
+    width: 24px;
+    height: 24px;
+  }
+
+  .search-input {
+    font-size: 18px;
+    padding: 6px 8px;
+  }
+
+  .location-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .icon-location-target {
+    width: 22px;
+    height: 22px;
+  }
+
+  .current-location {
+    margin-bottom: 16px;
+  }
+
+  .location-name {
+    font-size: 20px;
+  }
+
+  .icon-pin {
+    width: 12px;
+    height: 20px;
+  }
+
+  .temp-value {
+    font-size: 96px;
+    letter-spacing: -3px;
+  }
+
+  .temp-unit {
+    font-size: 36px;
+    margin-top: 8px;
+  }
+
+  .feels-like {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+
+  .feels-like-value {
+    font-size: 20px;
+  }
+
+  .current-condition {
+    margin-bottom: 16px;
+  }
+
+  .icon-condition-large {
+    width: 96px;
+    height: 96px;
+  }
+
+  .current-condition-wrapper {
+    gap: 20px;
+  }
+
+  .condition-name {
+    font-size: 32px;
+  }
+
+  .datetime-info .date-text,
+  .datetime-info .time-text {
+    font-size: 16px;
+  }
+
+  .theme-toggle-card .card-title {
+    font-size: 28px;
+  }
+
+  .card-header {
+    margin-bottom: 12px;
+  }
+
+  .card-header img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .metric-value {
+    font-size: 64px;
+    letter-spacing: -1px;
+  }
+
+  .metric-unit {
+    font-size: 32px;
+    margin-top: 4px;
+  }
+
+  .metric-display {
+    margin-bottom: 20px;
+  }
+
+  .uv-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .uv-ring-container {
+    width: 72px;
+    height: 72px;
+  }
+
+  .uv-value {
+    font-size: 32px;
+  }
+
+  .uv-status {
+    font-size: 32px;
+  }
+
+  .icon-precipitation-large {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 8px;
+  }
+
+  .precipitation-status {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dashboard-container {
+    padding: 12px 8px;
+  }
+
+  .temp-value {
+    font-size: 72px;
+  }
+
+  .temp-unit {
+    font-size: 28px;
+  }
+
+  .metric-value {
+    font-size: 48px;
+  }
+
+  .metric-unit {
+    font-size: 24px;
+  }
+
+  .icon-condition-large {
+    width: 72px;
+    height: 72px;
+  }
 }
