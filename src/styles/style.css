@@ -447,28 +447,11 @@ body {
 
 .theme-toggle-card {
   padding: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .theme-toggle-card .card-header {
   justify-content: center;
-  margin-bottom: 0;
-  gap: 12px;
-}
-
-.theme-toggle-card .card-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.theme-toggle-card.expanded .card-header {
   margin-bottom: 16px;
-}
-
-.theme-toggle-card.expanded .card-content {
-  max-height: 100px;
 }
 
 .theme-switch-container {
@@ -483,7 +466,7 @@ body {
   width: 120px;
   border: none;
   background: #ffffff;
-  padding: 8px 0;
+  padding: 10px 0;
   border-radius: 24px;
   cursor: pointer;
   font-family: "Yanone Kaffeesatz";
@@ -580,6 +563,7 @@ body {
 }
 
 .icon-dropdown {
+  display: none;
   width: 28px;
   height: 28px;
   cursor: pointer;
@@ -754,8 +738,36 @@ body {
     font-size: 16px;
   }
 
+  .theme-toggle-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .theme-toggle-card .card-header {
+    margin-bottom: 0;
+    gap: 12px;
+  }
+
   .theme-toggle-card .card-title {
     font-size: 28px;
+  }
+
+  .icon-dropdown {
+    display: block;
+  }
+
+  .theme-toggle-card .card-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .theme-toggle-card.expanded .card-header {
+    margin-bottom: 16px;
+  }
+
+  .theme-toggle-card.expanded .card-content {
+    max-height: 100px;
   }
 
   .card-header {
