@@ -3,6 +3,7 @@
 :root {
   --bg-color: #f4f6f8;
   --card-bg: #f3f3f3;
+  --surface-contrast: #ffffff;
   --text-main: #000000;
   --text-muted: #9d9d9d;
   --accent-color: #000000;
@@ -19,6 +20,21 @@
   --border-radius-sm: 8px;
   --shadow-sm: 6px 6px 16px 0px rgba(0, 0, 0, 0.25);
   --shadow-md: 8px 8px 16px 0px rgba(0, 0, 0, 0.25);
+}
+
+body.theme-dark {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --surface-contrast: #2a2a2a;
+  --text-main: #ffffff;
+  --text-muted: #9d9d9d;
+  --accent-color: #ffffff;
+  --progress-track-color: #333333;
+  --progress-fill-color: #5a9df2;
+  --progress-cloud-fill-color: #9aa3b2;
+  --uv-ring-track-color: #333333;
+  --shadow-sm: 6px 6px 16px 0px rgba(255, 255, 255, 0.03);
+  --shadow-md: 8px 8px 16px 0px rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -271,7 +287,7 @@ body {
   font-style: normal;
   font-weight: 400;
   margin-top: 12px;
-  color: #9d9d9d;
+  color: var(--text-muted);
 }
 
 .feels-like {
@@ -398,7 +414,7 @@ body {
   font-family: "Yanone Kaffeesatz";
   font-style: normal;
   font-weight: 400;
-  color: #9d9d9d;
+  color: var(--text-muted);
   margin-top: 8px;
   margin-left: 4px;
 }
@@ -480,6 +496,53 @@ body {
 .theme-btn.active {
   background-color: var(--accent-color);
   color: #ffffff;
+}
+
+body.theme-dark .unit-btn,
+body.theme-dark .search-container,
+body.theme-dark .location-btn,
+body.theme-dark .theme-btn {
+  background: var(--surface-contrast);
+}
+
+body.theme-dark .theme-btn.active,
+body.theme-dark .unit-btn.active {
+  background-color: var(--accent-color);
+  color: #000000;
+}
+
+body.theme-dark .unit-btn.active .unit-label {
+  color: #000000;
+}
+
+body.theme-dark .unit-label,
+body.theme-dark .uv-value,
+body.theme-dark .uv-status {
+  color: var(--text-main);
+}
+
+body.theme-dark .site-logo,
+body.theme-dark .icon-search,
+body.theme-dark .icon-location-target,
+body.theme-dark .icon-pin,
+body.theme-dark .icon-calendar,
+body.theme-dark .icon-dropdown,
+body.theme-dark .icon-condition-large,
+body.theme-dark .icon-precipitation,
+body.theme-dark .icon-precipitation-large {
+  filter: invert(1);
+}
+
+body.theme-dark .search-container {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-dark .location-btn:hover {
+  background: #333333;
+}
+
+body.theme-dark .search-input::placeholder {
+  color: #888888;
 }
 
 .uv-content {
