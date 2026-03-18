@@ -1,5 +1,5 @@
 import "./styles/style.css";
-import { print } from "./js/fetchWeather";
+import { renderWeather } from "./js/renderWeather";
 import { initThemeToggle } from "./js/themeToggle";
 
 // Theme toggle card expand/collapse
@@ -15,3 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+renderWeather();

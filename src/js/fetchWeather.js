@@ -1,10 +1,7 @@
-import { getWeatherDomNodes } from "./renderWeather";
-
-export const print = () => getWeatherDomNodes();
 const API_KEY = "S3LZG586WWP9JBSCNR433MST6";
 const location = "New York, NY";
 
-async function getWeather() {
+export async function getWeather() {
   try {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today?unitGroup=us&include=current&elements=datetime,temp,feelslike,humidity,cloudcover,uvindex,precip,precipprob,conditions,icon&key=${API_KEY}`,
@@ -30,6 +27,6 @@ async function getWeather() {
   }
 }
 
-getWeather().then((data) => {
-  console.log(data.currentConditions);
-});
+// getWeather().then((data) => {
+//   console.log(data.currentConditions);
+// });
