@@ -1,8 +1,6 @@
 import "./styles/style.css";
-import { print } from "./js/module";
+import { print } from "./js/fetchWeather";
 import { initThemeToggle } from "./js/themeToggle";
-
-console.log(print);
 
 // Theme toggle card expand/collapse
 document.addEventListener("DOMContentLoaded", () => {
