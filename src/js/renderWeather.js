@@ -5,6 +5,7 @@ import {
   getDisplayLocation,
   location,
 } from "./getUserLocation";
+import { showLoadingScreen, hideLoadingScreen } from "./loadingScreen";
 
 // icons for the weather conditions
 import clearDayIcon from "../icons/precipitation-icons/clear-day.svg";
@@ -202,42 +203,48 @@ function renderCurrentDateTime(timeZone) {
 }
 
 export async function renderWeather() {
-  initUnitToggle();
-  initLocationButton();
+  showLoadingScreen();
 
-  const weatherData = await getWeather(location);
+  try {
+    initUnitToggle();
+    initLocationButton();
 
-  if (!weatherData?.currentConditions) {
-    alert("Failed to fetch weather data");
-    return;
+    const weatherData = await getWeather(location);
+
+    if (!weatherData?.currentConditions) {
+      alert("Failed to fetch weather data");
+      return;
+    }
+
+    const currentConditionsData = weatherData.currentConditions;
+    const conditionText = currentConditionsData.conditions || "";
+    const iconSrc = getConditionIconSrc(conditionText);
+
+    resolvedAddress.textContent = await getDisplayLocation(weatherData);
+    tempValueInFahrenheit = Math.round(currentConditionsData.temp);
+
+    feelsLikeValueInFahrenheit = Math.round(currentConditionsData.feelslike);
+    conditions.textContent = conditionText;
+    currentConditionIcon.src = iconSrc;
+    currentConditionIcon.alt = conditionText || "Current weather condition";
+
+    precipitationIcon.src = iconSrc;
+    precipitationIcon.alt = conditionText || "Precipitation condition";
+    precipitationConditions.textContent = conditionText;
+
+    let humidityValue = Math.round(currentConditionsData.humidity);
+    humidity.textContent = humidityValue;
+    humidityProgressBar.style.width = `${humidityValue}%`;
+
+    cloudCover.textContent = Math.round(currentConditionsData.cloudcover);
+    cloudCoverProgressBar.style.width = `${Math.round(currentConditionsData.cloudcover)}%`;
+
+    uvIndex.textContent = Math.round(currentConditionsData.uvindex);
+    uvStatus.textContent = getUvStatus(currentConditionsData.uvindex);
+
+    renderCurrentDateTime(weatherData.timezone);
+    renderTempAndFeelsLike(getActiveUnit());
+  } finally {
+    hideLoadingScreen();
   }
-
-  const currentConditionsData = weatherData.currentConditions;
-  const conditionText = currentConditionsData.conditions || "";
-  const iconSrc = getConditionIconSrc(conditionText);
-
-  resolvedAddress.textContent = await getDisplayLocation(weatherData);
-  tempValueInFahrenheit = Math.round(currentConditionsData.temp);
-
-  feelsLikeValueInFahrenheit = Math.round(currentConditionsData.feelslike);
-  conditions.textContent = conditionText;
-  currentConditionIcon.src = iconSrc;
-  currentConditionIcon.alt = conditionText || "Current weather condition";
-
-  precipitationIcon.src = iconSrc;
-  precipitationIcon.alt = conditionText || "Precipitation condition";
-  precipitationConditions.textContent = conditionText;
-
-  let humidityValue = Math.round(currentConditionsData.humidity);
-  humidity.textContent = humidityValue;
-  humidityProgressBar.style.width = `${humidityValue}%`;
-
-  cloudCover.textContent = Math.round(currentConditionsData.cloudcover);
-  cloudCoverProgressBar.style.width = `${Math.round(currentConditionsData.cloudcover)}%`;
-
-  uvIndex.textContent = Math.round(currentConditionsData.uvindex);
-  uvStatus.textContent = getUvStatus(currentConditionsData.uvindex);
-
-  renderCurrentDateTime(weatherData.timezone);
-  renderTempAndFeelsLike(getActiveUnit());
 }
