@@ -1,10 +1,46 @@
-import { renderWeather } from "./renderWeather";
-
 const locationButton = document.querySelector(".location-btn");
+const searchInput = document.querySelector(".search-input");
 
 export let location = "New York, NY";
 let hasInitializedLocationButton = false;
+let hasInitializedSearchInput = false;
 let currentCoordinates = null;
+
+export function setLocation(nextLocation = "") {
+  const trimmedLocation = String(nextLocation).trim();
+
+  if (!trimmedLocation) {
+    return false;
+  }
+
+  location = trimmedLocation;
+  return true;
+}
+
+export function initSearchInput(onLocationChange) {
+  if (hasInitializedSearchInput || !searchInput) {
+    return;
+  }
+
+  hasInitializedSearchInput = true;
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+
+    e.preventDefault();
+
+    const didUpdateLocation = setLocation(searchInput.value);
+    if (!didUpdateLocation) {
+      return;
+    }
+
+    if (typeof onLocationChange === "function") {
+      onLocationChange();
+    }
+  });
+}
 
 function looksLikeCoordinates(value = "") {
   // regular expression to check if its a valid latitude, longitude
@@ -84,7 +120,7 @@ export async function getDisplayLocation(weatherData) {
   return "Current Location";
 }
 
-export function initLocationButton() {
+export function initLocationButton(onLocationChange) {
   //prevent multiple function call
   if (hasInitializedLocationButton || !locationButton) {
     return;
@@ -102,8 +138,14 @@ export function initLocationButton() {
       (position) => {
         const { latitude, longitude } = position.coords;
         currentCoordinates = { latitude, longitude };
-        location = `${latitude},${longitude}`;
-        renderWeather();
+
+        if (!setLocation(`${latitude},${longitude}`)) {
+          return;
+        }
+
+        if (typeof onLocationChange === "function") {
+          onLocationChange();
+        }
       },
       () => {
         alert(

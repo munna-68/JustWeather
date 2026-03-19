@@ -2,6 +2,7 @@ import { getWeather } from "./fetchWeather";
 import { fahrenheitToCelsius } from "./temperatureConverter";
 import {
   initLocationButton,
+  initSearchInput,
   getDisplayLocation,
   location,
 } from "./getUserLocation";
@@ -41,7 +42,6 @@ const uvStatus = document.querySelector(".uv-status");
 const precipitationConditions = document.querySelector(".precipitation-status");
 const precipitationIcon = document.querySelector(".icon-precipitation-large");
 
-const searchInput = document.querySelector(".search-input");
 const celsiusButton = document.querySelector("#celsius-btn");
 const fahrenheitButton = document.querySelector("#fahrenheit-btn");
 
@@ -58,6 +58,10 @@ const WEATHER_ICON_MAP = {
 let tempValueInFahrenheit;
 let feelsLikeValueInFahrenheit;
 let hasInitializedUnitToggle = false;
+
+function handleLocationChange() {
+  renderWeather();
+}
 
 function formatTemperatureValue(temperature) {
   return Math.round(temperature);
@@ -207,7 +211,8 @@ export async function renderWeather() {
 
   try {
     initUnitToggle();
-    initLocationButton();
+    initSearchInput(handleLocationChange);
+    initLocationButton(handleLocationChange);
 
     const weatherData = await getWeather(location);
 

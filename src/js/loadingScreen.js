@@ -1,5 +1,6 @@
 const loadingScreen = document.querySelector(".loading-screen");
 const loadingProgressFill = document.querySelector(".loader-progress-fill");
+const searchInput = document.querySelector(".search-input");
 
 let activeLoadingCount = 0;
 
