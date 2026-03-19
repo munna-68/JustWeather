@@ -37,6 +37,8 @@ const precipitationIcon = document.querySelector(".icon-precipitation-large");
 
 const locationButton = document.querySelector(".location-btn");
 const searchInput = document.querySelector(".search-input");
+const celsiusButton = document.querySelector("#celsius-btn");
+const fahrenheitButton = document.querySelector("#fahrenheit-btn");
 
 const WEATHER_ICON_MAP = {
   clear: clearDayIcon,
@@ -50,6 +52,7 @@ const WEATHER_ICON_MAP = {
 
 let tempValueInFahrenheit;
 let feelsLikeValueInFahrenheit;
+let hasInitializedUnitToggle = false;
 
 function formatTemperatureValue(temperature) {
   return Math.round(temperature);
@@ -99,13 +102,49 @@ function renderTempAndFeelsLike(unit) {
 
     return;
   } else {
-    temp.textContent = tempValueInFahrenheit;
-    feelsLike.textContent = `${feelsLikeValueInFahrenheit}°F`;
+    temp.textContent = formatTemperatureValue(tempValueInFahrenheit);
+    feelsLike.textContent = `${formatTemperatureValue(feelsLikeValueInFahrenheit)}°F`;
 
     if (tempUnit) {
       tempUnit.textContent = "°F";
     }
   }
+}
+
+function getActiveUnit() {
+  if (celsiusButton?.classList.contains("active")) {
+    return "C";
+  }
+
+  return "F";
+}
+
+function setActiveUnit(unit) {
+  const isCelsius = unit === "C";
+
+  celsiusButton?.classList.toggle("active", isCelsius);
+  fahrenheitButton?.classList.toggle("active", !isCelsius);
+
+  celsiusButton?.setAttribute("aria-pressed", String(isCelsius));
+  fahrenheitButton?.setAttribute("aria-pressed", String(!isCelsius));
+}
+
+function initUnitToggle() {
+  if (hasInitializedUnitToggle || !celsiusButton || !fahrenheitButton) {
+    return;
+  }
+
+  hasInitializedUnitToggle = true;
+
+  celsiusButton.addEventListener("click", () => {
+    setActiveUnit("C");
+    renderTempAndFeelsLike("C");
+  });
+
+  fahrenheitButton.addEventListener("click", () => {
+    setActiveUnit("F");
+    renderTempAndFeelsLike("F");
+  });
 }
 
 function getUvStatus(uvIndexValue) {
@@ -159,6 +198,8 @@ function renderCurrentDateTime(timeZone) {
 }
 
 export async function renderWeather() {
+  initUnitToggle();
+
   const weatherData = await getWeather();
 
   if (!weatherData?.currentConditions) {
@@ -193,5 +234,5 @@ export async function renderWeather() {
   uvStatus.textContent = getUvStatus(currentConditionsData.uvindex);
 
   renderCurrentDateTime(weatherData.timezone);
-  renderTempAndFeelsLike("C");
+  renderTempAndFeelsLike(getActiveUnit());
 }
