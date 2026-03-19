@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="loading-screen visible" aria-live="polite" aria-hidden="false">
+      <div class="loader-wrapper">
+        <div class="loader-progress-track">
+          <div class="loader-progress-fill"></div>
+        </div>
+        <p class="loader-text">Loading...</p>
+      </div>
+    </div>
+
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <div class="logo-container">
+          <img
+            src="0b57d6f144a5ccfb474f.svg"
+            alt="JustWeather Logo"
+            class="site-logo"
+          />
+        </div>
+
+        <div class="unit-toggle-container">
+          <button
+            class="unit-btn celsius"
+            id="celsius-btn"
+            aria-label="Celsius"
+          >
+            <span class="unit-label"><span class="unit-deg">°</span>C</span>
+          </button>
+          <button
+            class="unit-btn fahrenheit active"
+            id="fahrenheit-btn"
+            aria-label="Fahrenheit"
+          >
+            <span class="unit-label"><span class="unit-deg">°</span>F</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="weather-grid">
+        <article class="card main-weather-card">
+          <div class="search-wrapper">
+            <div class="search-container">
+              <img
+                src="972c3dc9d13765f2cc7b.svg"
+                alt="Search"
+                class="icon-search"
+              />
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search Location"
+                aria-label="Search Location"
+              />
+            </div>
+            <button class="location-btn" aria-label="Use Current Location">
+              <img
+                src="f146cabe4dafcb5ecd25.svg"
+                alt="Current Location"
+                class="icon-location-target"
+              />
+            </button>
+          </div>
+
+          <div class="current-location">
+            <img
+              src="dce87a0a657ebcced92f.svg"
+              alt="Location Pin"
+              class="icon-pin"
+            />
+            <h2 class="location-name">New York, USA</h2>
+          </div>
+
+          <div class="current-temperature">
+            <span class="temp-value">72</span>
+            <span class="temp-unit">°F</span>
+          </div>
+
+          <div class="feels-like">
+            <p>Feels Like <span class="feels-like-value">65°C</span></p>
+          </div>
+
+          <div class="current-condition">
+            <div class="current-condition-wrapper">
+              <img
+                src="e946f16ed971dd4db7b0.svg"
+                alt="Clear Weather"
+                class="icon-condition-large"
+              />
+              <h3 class="condition-name">Clear</h3>
+            </div>
+            <div class="current-datetime">
+              <img
+                src="8562bc0c35a2d784cc14.svg"
+                alt="Calendar"
+                class="icon-calendar"
+              />
+              <div class="datetime-info">
+                <p class="date-text">Sunday, Feb 2024</p>
+                <p class="time-text">2:30 AM</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card humidity-card">
+          <header class="card-header">
+            <img
+              src="15ab4f51f2884b66a054.svg"
+              alt="Humidity"
+              class="icon-humidity"
+            />
+            <h3 class="card-title">Humidity</h3>
+          </header>
+          <div class="card-content">
+            <div class="metric-display">
+              <span class="metric-value">69</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div
+                class="progress-bar-fill solid-fill"
+                style="width: 69%"
+              ></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card theme-toggle-card">
+          <header class="card-header">
+            <h3 class="card-title">Toggle Theme</h3>
+            <img
+              src="ae2f757b6102d86233c5.svg"
+              alt="Dropdown"
+              class="icon-dropdown"
+            />
+          </header>
+          <div class="card-content">
+            <div class="theme-switch-container">
+              <button class="theme-btn dark-theme active" aria-pressed="true">
+                Dark
+              </button>
+              <button class="theme-btn light-theme" aria-pressed="false">
+                Light
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card cloud-cover-card">
+          <header class="card-header">
+            <img
+              src="e8e37b1b44787cb82034.svg"
+              alt="Cloud Cover"
+              class="icon-cloud"
+            />
+            <h3 class="card-title">Cloud Cover</h3>
+          </header>
+          <div class="card-content">
+            <div class="metric-display">
+              <span class="metric-value">22</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div
+                class="progress-bar-fill dashed-fill"
+                style="width: 22%"
+              ></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card uv-index-card">
+          <header class="card-header">
+            <img
+              src="ab8d4643c6f3b79a0e79.svg"
+              alt="UV Index"
+              class="icon-uv"
+            />
+            <h3 class="card-title">UV Index</h3>
+          </header>
+          <div class="card-content uv-content">
+            <div class="uv-ring-container">
+              <span class="uv-value">6</span>
+              <img
+                src="ab8d4643c6f3b79a0e79.svg"
+                alt="UV Ring"
+                class="uv-ring-svg"
+              />
+            </div>
+            <span class="uv-status">High</span>
+          </div>
+        </article>
+
+        <article class="card precipitation-card">
+          <header class="card-header">
+            <img
+              src="e946f16ed971dd4db7b0.svg"
+              alt="Precipitation"
+              class="icon-precipitation"
+            />
+            <h3 class="card-title">Precipitation</h3>
+          </header>
+          <div class="card-content precipitation-content">
+            <img
+              src="e946f16ed971dd4db7b0.svg"
+              alt="Clear Precipitation"
+              class="icon-precipitation-large"
+            />
+            <h4 class="precipitation-status">Clear</h4>
+          </div>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>
