@@ -80,6 +80,48 @@ function getUvStatus(uvIndexValue) {
   return "Extreme";
 }
 
+function renderCurrentDateTime(timeZone) {
+  if (!date || !time) {
+    return;
+  }
+
+  const now = new Date();
+
+  let dateFormatter;
+  let timeFormatter;
+
+  try {
+    dateFormatter = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "short",
+      year: "numeric",
+      ...(timeZone ? { timeZone } : {}),
+    });
+
+    timeFormatter = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      ...(timeZone ? { timeZone } : {}),
+    });
+  } catch (error) {
+    dateFormatter = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "short",
+      year: "numeric",
+    });
+
+    timeFormatter = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  }
+
+  date.textContent = dateFormatter.format(now);
+  time.textContent = timeFormatter.format(now);
+}
+
 export async function renderWeather() {
   const weatherData = await getWeather();
 
@@ -114,4 +156,6 @@ export async function renderWeather() {
 
   uvIndex.textContent = Math.round(currentConditionsData.uvindex);
   uvStatus.textContent = getUvStatus(currentConditionsData.uvindex);
+
+  renderCurrentDateTime(weatherData.timezone);
 }
