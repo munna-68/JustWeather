@@ -1,4 +1,5 @@
 import { getWeather } from "./fetchWeather";
+import { fahrenheitToCelsius } from "./temperatureConverter";
 
 // icons for the weather conditions
 import clearDayIcon from "../icons/precipitation-icons/clear-day.svg";
@@ -11,6 +12,7 @@ import snowIcon from "../icons/precipitation-icons/snow.png";
 
 const resolvedAddress = document.querySelector(".location-name");
 const temp = document.querySelector(".temp-value");
+const tempUnit = document.querySelector(".temp-unit");
 const feelsLike = document.querySelector(".feels-like-value");
 const conditions = document.querySelector(".condition-name");
 const currentConditionIcon = document.querySelector(".icon-condition-large");
@@ -46,6 +48,13 @@ const WEATHER_ICON_MAP = {
   snow: snowIcon,
 };
 
+let tempValueInFahrenheit;
+let feelsLikeValueInFahrenheit;
+
+function formatTemperatureValue(temperature) {
+  return Math.round(temperature);
+}
+
 function getConditionIconSrc(conditionText = "") {
   const normalizedCondition = String(conditionText).toLowerCase();
 
@@ -69,6 +78,33 @@ function getConditionIconSrc(conditionText = "") {
       return WEATHER_ICON_MAP.clear;
     default:
       return WEATHER_ICON_MAP.clear;
+  }
+}
+
+function renderTempAndFeelsLike(unit) {
+  if (unit === "C") {
+    const celsiusTemp = formatTemperatureValue(
+      fahrenheitToCelsius(tempValueInFahrenheit),
+    );
+    const celsiusFeelsLike = formatTemperatureValue(
+      fahrenheitToCelsius(feelsLikeValueInFahrenheit),
+    );
+
+    temp.textContent = celsiusTemp;
+    feelsLike.textContent = `${celsiusFeelsLike}°C`;
+
+    if (tempUnit) {
+      tempUnit.textContent = "°C";
+    }
+
+    return;
+  } else {
+    temp.textContent = tempValueInFahrenheit;
+    feelsLike.textContent = `${feelsLikeValueInFahrenheit}°F`;
+
+    if (tempUnit) {
+      tempUnit.textContent = "°F";
+    }
   }
 }
 
@@ -135,10 +171,9 @@ export async function renderWeather() {
   const iconSrc = getConditionIconSrc(conditionText);
 
   resolvedAddress.textContent = weatherData.resolvedAddress;
-  temp.textContent = Math.round(currentConditionsData.temp);
+  tempValueInFahrenheit = Math.round(currentConditionsData.temp);
 
-  let feelsLikeValue = Math.round(currentConditionsData.feelslike);
-  feelsLike.textContent = `${feelsLikeValue}°F`;
+  feelsLikeValueInFahrenheit = Math.round(currentConditionsData.feelslike);
   conditions.textContent = conditionText;
   currentConditionIcon.src = iconSrc;
   currentConditionIcon.alt = conditionText || "Current weather condition";
@@ -158,4 +193,5 @@ export async function renderWeather() {
   uvStatus.textContent = getUvStatus(currentConditionsData.uvindex);
 
   renderCurrentDateTime(weatherData.timezone);
+  renderTempAndFeelsLike("C");
 }
