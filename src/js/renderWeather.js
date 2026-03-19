@@ -1,5 +1,10 @@
 import { getWeather } from "./fetchWeather";
 import { fahrenheitToCelsius } from "./temperatureConverter";
+import {
+  initLocationButton,
+  getDisplayLocation,
+  location,
+} from "./getUserLocation";
 
 // icons for the weather conditions
 import clearDayIcon from "../icons/precipitation-icons/clear-day.svg";
@@ -35,7 +40,6 @@ const uvStatus = document.querySelector(".uv-status");
 const precipitationConditions = document.querySelector(".precipitation-status");
 const precipitationIcon = document.querySelector(".icon-precipitation-large");
 
-const locationButton = document.querySelector(".location-btn");
 const searchInput = document.querySelector(".search-input");
 const celsiusButton = document.querySelector("#celsius-btn");
 const fahrenheitButton = document.querySelector("#fahrenheit-btn");
@@ -199,8 +203,9 @@ function renderCurrentDateTime(timeZone) {
 
 export async function renderWeather() {
   initUnitToggle();
+  initLocationButton();
 
-  const weatherData = await getWeather();
+  const weatherData = await getWeather(location);
 
   if (!weatherData?.currentConditions) {
     alert("Failed to fetch weather data");
@@ -211,7 +216,7 @@ export async function renderWeather() {
   const conditionText = currentConditionsData.conditions || "";
   const iconSrc = getConditionIconSrc(conditionText);
 
-  resolvedAddress.textContent = weatherData.resolvedAddress;
+  resolvedAddress.textContent = await getDisplayLocation(weatherData);
   tempValueInFahrenheit = Math.round(currentConditionsData.temp);
 
   feelsLikeValueInFahrenheit = Math.round(currentConditionsData.feelslike);
