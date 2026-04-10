@@ -276,6 +276,49 @@ body.theme-dark .loading-screen {
   grid-row: 8 / 13;
 }
 
+@media (max-width: 1200px) and (min-width: 769px) {
+  .weather-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto auto;
+    height: auto;
+  }
+
+  .main-weather-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .theme-toggle-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 18px 24px;
+    align-items: stretch;
+  }
+
+  .humidity-card {
+    grid-column: 1 / 2;
+    grid-row: auto;
+  }
+
+  .cloud-cover-card {
+    grid-column: 2 / 3;
+    grid-row: auto;
+  }
+
+  .uv-index-card {
+    grid-column: 1 / 2;
+    grid-row: auto;
+  }
+
+  .precipitation-card {
+    grid-column: 2 / 3;
+    grid-row: auto;
+  }
+}
+
 /* Main Weather Card */
 .search-wrapper {
   display: flex;
