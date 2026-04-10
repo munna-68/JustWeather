@@ -258,7 +258,12 @@ body.theme-dark .loading-screen {
 .theme-toggle-card {
   grid-column: 3 / 4;
   grid-row: 1 / 3;
+  min-height: 95px;
+  max-height: 100%;
+  justify-content: center;
   align-items: center;
+  gap: 0;
+  overflow: hidden;
 }
 
 .uv-index-card {
