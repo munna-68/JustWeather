@@ -1,11 +1,7 @@
-import { showLoadingScreen, hideLoadingScreen } from "./loadingScreen";
-
 const API_KEY = "S3LZG586WWP9JBSCNR433MST6";
 const DEFAULT_LOCATION = "New York, NY";
 
 export async function getWeather(location = DEFAULT_LOCATION) {
-  showLoadingScreen();
-
   try {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today?unitGroup=us&include=current&elements=datetime,temp,feelslike,humidity,cloudcover,uvindex,precip,precipprob,conditions,icon&key=${API_KEY}`,
@@ -28,7 +24,5 @@ export async function getWeather(location = DEFAULT_LOCATION) {
     } else {
       console.error("Unknown error occurred.");
     }
-  } finally {
-    hideLoadingScreen();
   }
 }
