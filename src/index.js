@@ -2,6 +2,8 @@ import "./styles/style.css";
 import { renderWeather } from "./js/renderWeather";
 import { initThemeToggle } from "./js/themeToggle";
 
+document.title = "Just Weather";
+
 // Theme toggle card expand/collapse
 document.addEventListener("DOMContentLoaded", () => {
   const themeCard = document.querySelector(".theme-toggle-card");
